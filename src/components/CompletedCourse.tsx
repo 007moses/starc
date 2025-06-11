@@ -353,6 +353,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import mentor from "../Assets/Image-60.png";
+import RightSideBar from "./RightSideBar";
 
 
 const APlusIcon: React.FC = () => (
@@ -632,8 +633,9 @@ const ReviewCard: React.FC<{ review: Review }> = ({ review }) => {
   );
 };
 
+
 // --- Main CourseDashboardPage Component ---
-const CourseDashboardPage: React.FC<{ course: Course; onBack: () => void }> = ({
+const CourseDashboardPage: React.FC<{course: Course; onBack: () => void }> = ({
   course,
   onBack,
 }) => {
@@ -726,11 +728,11 @@ const CourseDashboardPage: React.FC<{ course: Course; onBack: () => void }> = ({
     },
     {
       id: 4,
-      type: "Project",
+      type: "Assessment",
       number: 1,
       title: "Databases in AWS",
       score: "Reviewed",
-      status: "Submitted",
+      status: "completed",
       date: "May 7, 2025 11:00 AM",
     },
     {
@@ -743,6 +745,7 @@ const CourseDashboardPage: React.FC<{ course: Course; onBack: () => void }> = ({
       date: "May 7, 2025 11:00 AM",
     },
   ];
+
   const handleToggleAssessments = () => {
     setShowAssessments((prevState) => !prevState);
   };
@@ -779,7 +782,7 @@ const CourseDashboardPage: React.FC<{ course: Course; onBack: () => void }> = ({
       : "0.0";
 
   return (
-    <div className="min-h-screen bg-gray-100 font-sans text-gray-800">
+    <div className="min-h-screen bg-gray-100 font-sans text-gray-800 w-full">
       {/* Back Button */}
       <div className="container mx-auto p-6">
         <button
@@ -790,9 +793,10 @@ const CourseDashboardPage: React.FC<{ course: Course; onBack: () => void }> = ({
         </button>
 
         {/* Top Section: Course Info (Left) and Progress/Suggested (Right) */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="flex space-x-6">
           {/* Left: Course Info and Actions */}
-          <div className="lg:col-span-2 space-y-6">
+         <div className="flex-grow">
+           <div className="space-y-6">
             <h1 className="text-2xl font-bold flex items-center">
               {course.title}
               <span className="text-base font-normal text-green-600 ml-1 flex items-center">
@@ -835,9 +839,9 @@ const CourseDashboardPage: React.FC<{ course: Course; onBack: () => void }> = ({
             </div>
 
             {/* overview section */}
-            <section className=" p-6 rounded-lg  w-3/3">
+            <section className=" p-1 rounded-lg w-full">
             {showAssessments && (
-              <section className="bg-white p-6 rounded-lg mb-5 shadow-md">
+              <section className=" p-1 rounded-lg mb-5">
                 <h2 className="text-2xl font-semibold mb-4">Assessments & Projects</h2>
                 <div className="overflow-x-auto">
                   <div className="min-w-[600px] md:min-w-full">
@@ -899,10 +903,14 @@ const CourseDashboardPage: React.FC<{ course: Course; onBack: () => void }> = ({
               </div>
             </section>
           </div>
+          <div className="w-1/4 min-w-[300px] max-w-[350px]">
+          <RightSideBar/>
+          </div>
+         </div>
+
 
           {/* Right: Course Progress and Suggested Next */}
-          <div className="lg:col-span-1 space-y-8">
-            {/* Course Completion Card */}
+          {/* <div className="lg:col-span-1 space-y-8">
             <div className="relative p-6 bg-gradient-to-br from-purple-600 to-indigo-700 rounded-lg shadow-lg text-white overflow-hidden">
               <div
                 className="absolute inset-0 opacity-10"
@@ -940,7 +948,6 @@ const CourseDashboardPage: React.FC<{ course: Course; onBack: () => void }> = ({
               </div>
             </div>
 
-            {/* Suggested Next Section */}
             <div>
               <h3 className="text-xl font-semibold text-gray-800 mb-4">
                 Suggested Next
@@ -984,13 +991,13 @@ const CourseDashboardPage: React.FC<{ course: Course; onBack: () => void }> = ({
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Bottom Section: Overview, Mentor, Reviews */}
         <div className="space-y-8 mt-8">
           {/* Reviews Section */}
-          <section className="rounded-lg  w-3/5">
+          <section className="rounded-lg  w-full">
             <div className="bg-white p-6  shadow-md mb-5">
               <h2 className="text-2xl font-semibold mb-4">Reviews</h2>
               <div className="flex flex-col sm:flex-row justify-between items-center mb-6">

@@ -2,7 +2,8 @@ import React from 'react';
 
 function RightSideBar() {
   return (
-    <div className="w-full lg:w-[300px] ml-auto space-y-8 flex justify-end">
+    <div className='flex justify-center items-center w-[380px] border shadow-md bg-white rounded-md '>
+      <div className="w-full lg:w-[330px] space-y-8  py-3">
       {/* Complete Few Courses Card */}
       <div className="relative p-6 bg-gradient-to-br from-purple-600 to-indigo-700 rounded-lg shadow-lg text-white overflow-hidden">
         <div
@@ -71,6 +72,8 @@ function RightSideBar() {
         </div>
       </div>
     </div>
+    </div>
+    
   );
 }
 

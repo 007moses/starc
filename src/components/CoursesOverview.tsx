@@ -93,8 +93,14 @@ type Course = {
   status: string;
 };
 
-const CoursesOverview: React.FC = () => {
+interface childProps {
+  sendMessage: (course:Course)=>void;
+}
+
+const CoursesOverview: React.FC <childProps> = ({sendMessage}) => {
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
+
+
 
   const courses: Course[] = [
     { id: '1', image: 'https://via.placeholder.com/150', title: 'AWS Solutions Architect', progress: 50, duration: '1 Month', status: '50%' },
@@ -127,15 +133,19 @@ const CoursesOverview: React.FC = () => {
     // );
   }
 
+  const handleSelectedCourse=(course:Course)=>{
+    setSelectedCourse(course);
+    sendMessage(course)
+  }
   // Course List View
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
+    <div className="min-h-screen bg-gray-100 font-sans text-gray-800 w-full">
       <h1 className="text-2xl font-bold mb-6">My Courses ({courses.length})</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {courses.map((course) => (
           <div
             key={course.id}
-            onClick={() => setSelectedCourse(course)}
+            onClick={() => handleSelectedCourse(course)}
             className="cursor-pointer bg-white rounded-lg shadow-md p-4 flex flex-col items-center text-center hover:shadow-lg transition"
           >
             <img src={course.image} alt={course.title} className="w-full h-32 object-cover rounded-md mb-4" />
@@ -146,13 +156,13 @@ const CoursesOverview: React.FC = () => {
                 style={{ width: `${course.progress}%` }}
               ></div>
             </div>
-            <p className="text-sm text-gray-600 mb-2">{course.duration}</p>
+            <p className="text-sm text-gray-600 mb-2">{course.duration}</p> 
             <p className="text-sm text-gray-600">{course.status}</p>
           </div>
         ))}
       </div>
-      <SideSchedule />
-      <LearningOverview />
+      {/* <SideSchedule /> */}
+      {/* <LearningOverview /> */}
     </div>
   );
 };
